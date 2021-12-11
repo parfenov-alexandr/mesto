@@ -8,12 +8,6 @@
   margin: 0;
 }
 
-@media screen and (max-width: 600px) {
-  .footer__copyright {
-    font-size: .8rem;
-  }
-}
-
 @media screen and (max-width: 540px) {
   .footer__copyright {
     text-align: left;
