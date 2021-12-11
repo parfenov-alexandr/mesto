@@ -1,0 +1,29 @@
+.profile {
+  max-width: 880px;
+  height: auto;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 146px repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-template-areas: "avatar info addbutton";
+  align-items: center;
+  justify-items: start;
+}
+
+@media screen and (max-width: 960px) {
+  .profile {
+    max-width: 720px;
+    grid-template-columns: 130px repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .profile {
+    max-width: 282px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "avatar"
+                        "info"
+                        "addbutton";
+    justify-items: center;
+  }
+}

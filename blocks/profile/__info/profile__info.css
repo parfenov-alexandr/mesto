@@ -1,0 +1,26 @@
+.profile__info {
+  width: 336px;
+  height: 73px;
+  margin: 0;
+  grid-area: info;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 680px) {
+  .profile__info {
+    justify-content: start;
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .profile__info {
+    width: 282px;
+    height: auto;
+    align-items: center;
+    justify-items: center;
+    margin: 22px auto 0;
+  }
+}

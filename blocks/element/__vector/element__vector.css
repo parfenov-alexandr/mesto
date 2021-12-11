@@ -1,0 +1,16 @@
+.element__vector {
+  width: 22px;
+  height: 19px;  
+  background-image: url(../../../images/heart.svg);
+  background-position: bottom;
+  margin: 5px 20px 0 0;
+  cursor: pointer;  
+}
+
+.element__vector:hover {
+  background-image: url(../../../images/heart_hover.svg);
+}
+
+.element__vector:active {
+  background-image: url(../../../images/heart_active.svg);
+}
