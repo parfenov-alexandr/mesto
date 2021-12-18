@@ -1,0 +1,13 @@
+.form {
+  width: 358px;
+  margin: 0 auto 37px;
+}
+
+@media screen and (max-width: 540px) {
+  .form {
+    font-size: 18px;
+    line-height: 22px;
+    width: 238px;
+    margin: 0 auto 25px;
+  }
+}

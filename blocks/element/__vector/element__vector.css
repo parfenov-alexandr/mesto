@@ -1,10 +1,14 @@
 .element__vector {
   width: 22px;
-  height: 19px;  
+  height: 19px;
   background-image: url(../../../images/heart.svg);
-  background-position: bottom;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  background-position: center;
   margin: 5px 20px 0 0;
-  cursor: pointer;  
+  cursor: pointer;
+  padding: 0;
 }
 
 .element__vector:hover {
