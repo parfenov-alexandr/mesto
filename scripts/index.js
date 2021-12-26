@@ -36,7 +36,7 @@ const elementAddForm = elementPopup.querySelector('.form');
 
 //кнопки
 const editButton = document.querySelector('.profile__info-edit-button');
-const closeButton = profilePopup.querySelector('.popup__close-icon');
+const closeEditButton = profilePopup.querySelector('.popup__close-icon');
 const addButton = document.querySelector('.profile__add-button');
 const closeAddButton = elementPopup.querySelector('.popup__close-icon')
 
@@ -55,7 +55,6 @@ const imageTemplate = document.querySelector('#image').content;
 const elementsTemplate = document.querySelector('#place').content;
 
 const elementsList = document.querySelector('.elements');
-
 
 //функции
 function togglePopup() {
@@ -102,7 +101,7 @@ editButton.addEventListener('click', function () {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
 });
-closeButton.addEventListener('click', togglePopup);
+closeEditButton.addEventListener('click', togglePopup);
 addButton.addEventListener('click', toggleAddForm);
 closeAddButton.addEventListener('click', toggleAddForm);
 popupForm.addEventListener('submit', function (evt) {
