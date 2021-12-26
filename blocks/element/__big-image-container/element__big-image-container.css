@@ -1,0 +1,9 @@
+.element__big-image-container {
+  width: auto;
+  /*object-fit: contain;
+  object-position: center;*/
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}

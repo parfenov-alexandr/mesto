@@ -12,5 +12,6 @@
 }
 
 .element__vector:hover {
-  background-image: url(../../../images/heart_hover.svg);
+  opacity: .5;
+  transition: opacity .5s ease .2s;
 }

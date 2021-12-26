@@ -43,7 +43,7 @@
     <div class="popup popup_type_add">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form class="form" name="elementInput" id="elementInput" action="#">
+        <form class="form" name="elementInput" action="#">
           <button type="button" class="popup__close-icon"></button>
           <input type="text" id="element-name" name="element-name" class="form__field" placeholder="Введите название">
           <input type="text" id="element-link" name="element-link" class="form__field" placeholder="Введите ссылку">
@@ -51,14 +51,24 @@
         </form>
       </div>
     </div>
+    <div class="popup popup_type_image-enlarge"></div>
   </div>
   <template id="place">
     <li class="element">
-      <button type="button" class="element__enlarge"><img class="element__image" alt="Фото места"></button>
+      <img class="element__image" alt="Фото места">
       <h2 class="element__title"></h2>
       <button type="button" class="element__vector"></button>
       <button type="button" class="element__delete"></button>
     </li>
+  </template>
+  <template id="image">
+    <div class="element__big-image-container">
+      <figure class="element__figure">
+        <img class="element__big-image" src="" alt="Увеличенное изображение">
+        <figcaption class="popup__image-title"></figcaption>
+      </figure>
+      <button type="button" class="popup__image-close-icon"></button>
+    </div>
   </template>
   <script src="./scripts/index.js"></script>
 </body>
