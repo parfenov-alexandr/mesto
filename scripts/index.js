@@ -89,7 +89,7 @@ function createElement(item) {
   elementImage.alt = 'Фотография с изображением ' + item.name;
   deleteButton.addEventListener('click', deleteElement);
   likeButton.addEventListener('click', like);
-  elementImage.addEventListener('click', function() {
+  elementImage.addEventListener('click', function () {
     openPopup(bigImagePopup);
     const bigImage = bigImagePopup.querySelector('.element__big-image');
     const bigImageTitle = bigImagePopup.querySelector('.popup__image-title');
