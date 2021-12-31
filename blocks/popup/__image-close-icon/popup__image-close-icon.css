@@ -8,6 +8,7 @@
   cursor: pointer;
   padding: 0;
   transform: translate(8px, -40px);
+  margin: 0;
 }
  .popup__image-close-icon:hover {
    opacity: 0.6;
