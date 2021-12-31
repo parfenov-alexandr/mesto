@@ -92,7 +92,7 @@ function createElement(item) {
   elementImage.addEventListener('click', function () {
     openPopup(bigImagePopup);
     const bigImage = bigImagePopup.querySelector('.element__big-image');
-    const bigImageTitle = bigImagePopup.querySelector('.popup__image-title');
+    const bigImageTitle = bigImagePopup.querySelector('.element__image-title');
     bigImage.src = item.link;
     bigImageTitle.textContent = item.name;
     bigImage.alt = 'Фотография с изображением ' + item.name;

@@ -1,4 +1,4 @@
-.element__image-container {
+.popup__image-container {
   display: grid;
   grid-template-columns: auto 32px;
 }
