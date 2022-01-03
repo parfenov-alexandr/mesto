@@ -24,6 +24,8 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+//шаблоны
+const elementsTemplate = document.querySelector('#place').content;
 
 //попапы
 const profilePopup = document.querySelector('.popup_type_edit');
@@ -51,9 +53,6 @@ const jobInput = document.querySelector('#occupation');
 const elementTitleInput = document.querySelector('#element-name');
 const elementImageInput = document.querySelector('#element-link');
 
-//шаблоны
-const elementsTemplate = document.querySelector('#place').content;
-
 //область с карточками
 const elementsList = document.querySelector('.elements');
 
@@ -68,7 +67,7 @@ function addProfileData() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
 }
-function apdateProfileData() {
+function updateProfileData() {
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobInput.value;
 }
@@ -78,25 +77,28 @@ function deleteElement(evt) {
 function like(evt) {
   evt.target.classList.toggle('element__vector_active');
 }
-function createElement(item) {
+function createElement(name, link) {
   const element = elementsTemplate.cloneNode(true);
   const elementImage = element.querySelector('.element__image');
   const elementTitle = element.querySelector('.element__title');
   const likeButton = element.querySelector('.element__vector');
   const deleteButton = element.querySelector('.element__delete');
-  elementImage.src = item.link;
-  elementTitle.textContent = item.name;
-  elementImage.alt = 'Фотография с изображением ' + item.name;
+  elementImage.src = link;
+  elementTitle.textContent = name;
+  elementImage.alt = 'Фотография с изображением ' + name;
   deleteButton.addEventListener('click', deleteElement);
   likeButton.addEventListener('click', like);
   elementImage.addEventListener('click', function () {
     openPopup(bigImagePopup);
     const bigImage = bigImagePopup.querySelector('.popup__big-image');
     const bigImageTitle = bigImagePopup.querySelector('.popup__big-image-title');
-    bigImage.src = item.link;
-    bigImageTitle.textContent = item.name;
-    bigImage.alt = 'Фотография с изображением ' + item.name;
+    bigImage.src = link;
+    bigImageTitle.textContent = name;
+    bigImage.alt = 'Фотография с изображением ' + name;
   });
+  return element;
+}
+function addElement(elementsList, element) {
   elementsList.prepend(element);
 }
 
@@ -116,15 +118,12 @@ closeAddButton.addEventListener('click', function () {
 });
 popupForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
-  apdateProfileData();
+  updateProfileData();
   closePopup(profilePopup);
 });
 elementAddForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
-  createElement({
-    name: elementTitleInput.value,
-    link: elementImageInput.value
-  });
+  addElement(elementsList, createElement(elementTitleInput.value, elementImageInput.value))
   elementAddForm.reset();
   closePopup(elementPopup);
 });
@@ -133,4 +132,7 @@ closeImageButton.addEventListener('click', function () {
 })
 
 //первоначальное размещение карточек на странице
-initialCards.forEach(createElement);
+
+initialCards.forEach(function (element) {
+  addElement(elementsList, createElement(element.name, element.link))
+});
