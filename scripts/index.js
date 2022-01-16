@@ -42,7 +42,7 @@ const closeEditButton = profilePopup.querySelector('.popup__close-icon');
 const addButton = document.querySelector('.profile__add-button');
 const closeAddButton = elementPopup.querySelector('.popup__close-icon');
 const closeImageButton = bigImagePopup.querySelector('.popup__image-close-icon');
-const buttonElement = profilePopup.querySelector('.popup__submit-button');   //проверить
+const buttonElement = profilePopup.querySelector('.popup__submit-button');
 
 //поля
 const profileTitle = document.querySelector('.profile__info-title');
@@ -60,8 +60,15 @@ const elementsList = document.querySelector('.elements');
 //функции
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', (evt) => {                  //закрытие popup нажатием escape
+    keyHandler(evt);
+    errorMessageClean();
+  });
 }
 const closePopup = (popup) => {
+  document.removeEventListener('keydown', (evt) => {
+    keyHandler(evt);
+  });
   popup.classList.remove('popup_opened');
 }
 const addProfileData = () => {
@@ -149,12 +156,6 @@ closeImageButton.addEventListener('click', () => {
 //первоначальное размещение карточек на странице
 initialCards.forEach((element) => {
   addElement(elementsList, createElement(element.name, element.link))
-});
-
-//закрытие popup нажатием escape
-document.addEventListener('keydown', (evt) => {
-  keyHandler(evt);
-  errorMessageClean();
 });
 
 //закрытие popup кликом по overlay
