@@ -28,8 +28,10 @@
 @import url(../blocks/form/__field-error/form__field-error.css);
 @import url(../blocks/form/__field-error/__field-error_active/form__field-error_active.css);
 @import url(../blocks/form/__field/_type/form__field_type_error.css);
-@import url(../blocks/name-input-error/name-input-error.css);
-@import url(../blocks/description-input-error/description-input-error.css);
+@import url(../blocks/name-error/name-error.css);
+@import url(../blocks/element-link-error/element-link-error.css);
+@import url(../blocks/element-name-error/element-name-error.css);
+@import url(../blocks/occupation-error/occupation-error.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);

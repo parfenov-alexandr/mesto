@@ -49,10 +49,10 @@ const profileTitle = document.querySelector('.profile__info-title');
 const profileSubtitle = document.querySelector('.profile__info-subtitle');
 
 //поля ввода
-const nameInput = popupForm.querySelector('#name-input');
-const jobInput = popupForm.querySelector('#description-input');
-const elementTitleInput = elementAddForm.querySelector('#name-input');
-const elementImageInput = elementAddForm.querySelector('#description-input');
+const nameInput = popupForm.querySelector('#name');
+const jobInput = popupForm.querySelector('#occupation');
+const elementTitleInput = elementAddForm.querySelector('#element-name');
+const elementImageInput = elementAddForm.querySelector('#element-link');
 
 //область с карточками
 const elementsList = document.querySelector('.elements');
