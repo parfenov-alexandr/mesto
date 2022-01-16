@@ -1,7 +1,8 @@
 .form__field {
     width: 100%;
-    margin: 0 0 30px;
-    padding: 0 0 6px 5px;
+    height: 27px;
+    margin: 0 0 29px;
+    padding: 0 0 12px;
     box-sizing: border-box;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
@@ -18,7 +19,7 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 17px;
-    color: #000000;
+    color: #c4c4c4;
   }
 
   .form__field::-webkit-input-placeholder {
@@ -27,7 +28,7 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 17px;
-    color: #000000;
+    color: #c4c4c4;
   }
 
   .form__field::-moz-placeholder {
@@ -36,7 +37,7 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 17px;
-    color: #000000;
+    color: #c4c4c4;
   }
 
   .form__field::-ms-input-placeholder {
@@ -45,6 +46,10 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 17px;
-    color: #000000;
+    color: #c4c4c4;
   }
 
+.form__field:focus {
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
