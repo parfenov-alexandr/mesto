@@ -99,7 +99,7 @@ const addElement = (elementsList, element) => {
 }
 const disableSubmitBtn = (buttonElement) => {
   buttonElement.classList.add('popup__submit-button_inactive')
-  buttonElement.disable = true;
+  buttonElement.disabled = true;
 }
 
 //обработчики
