@@ -16,7 +16,6 @@ const closeEditButton = profilePopup.querySelector('.popup__close-icon');
 const addButton = document.querySelector('.profile__add-button');
 const closeAddButton = elementPopup.querySelector('.popup__close-icon');
 const closeImageButton = bigImagePopup.querySelector('.popup__image-close-icon');
-const buttonElement = profilePopup.querySelector('.popup__submit-button');
 
 //поля
 const profileTitle = document.querySelector('.profile__info-title');
@@ -32,6 +31,13 @@ const elementImageInput = formAddCard.querySelector('#element-link');
 const bigImage = bigImagePopup.querySelector('.popup__big-image');
 const bigImageTitle = bigImagePopup.querySelector('.popup__big-image-title');
 
+//список всех попапов
+const popupList = Array.from(document.querySelectorAll('.popup'));
+
+//сабмиты попапов
+const editProfileSubmitButton = profilePopup.querySelector('.popup__submit-button');
+const addCardSubmitButton = elementPopup.querySelector('.popup__submit-button');
+
 //область с карточками
 const elementsList = document.querySelector('.elements');
 
@@ -44,18 +50,15 @@ const keyHandler = (evt) => {                                            //фу�
 }
 const errorMessageClean = () => {                                                          //чистит сообщения об ошибках
   const errorMessage = Array.from(document.querySelectorAll('.form__field-error_active'));
-  errorMessage.forEach((item) => {
+  errorMessage.forEach(item => {
     item.textContent = "";
   });
 };
 const openPopup = (popup) => {
+  document.addEventListener('keydown', keyHandler);              //закрытие popup нажатием escape
   popup.classList.add('popup_opened');
-  errorMessageClean();
-  document.addEventListener('keydown', keyHandler);                 //закрытие popup нажатием escape
 }
-
 const closePopup = (popup) => {
-  document.addEventListener('keydown', keyHandler);                 //закрытие popup нажатием escape
   popup.classList.remove('popup_opened');
 }
 const addProfileData = () => {
@@ -94,9 +97,14 @@ const createElement = (name, link) => {
 const addElement = (elementsList, element) => {
   elementsList.prepend(element);
 }
+const disableSubmitBtn = (buttonElement) => {
+  buttonElement.classList.add('popup__submit-button_inactive')
+  buttonElement.disable = true;
+}
 
 //обработчики
 editButton.addEventListener('click', () => {
+  errorMessageClean();
   addProfileData();
   openPopup(profilePopup);
 });
@@ -105,6 +113,7 @@ closeEditButton.addEventListener('click', () => {
   closePopup(profilePopup);
 });
 addButton.addEventListener('click', () => {
+  errorMessageClean();
   formAddCard.reset();
   openPopup(elementPopup);
 });
@@ -115,16 +124,14 @@ closeAddButton.addEventListener('click', () => {
 formEditProfile.addEventListener('submit', (evt) => {                              //submit для профиля
   evt.preventDefault();
   updateProfileData();
-  const buttonElement = formEditProfile.querySelector('.popup__submit-button');
-  buttonElement.classList.add('popup__submit-button_inactive');
+  disableSubmitBtn(editProfileSubmitButton);
   closePopup(profilePopup);
 });
 formAddCard.addEventListener('submit', (evt) => {                               //submit для карточки
   evt.preventDefault();
   addElement(elementsList, createElement(elementTitleInput.value, elementImageInput.value))
   formAddCard.reset();
-  const buttonElement = formAddCard.querySelector('.popup__submit-button');
-  buttonElement.classList.add('popup__submit-button_inactive');
+  disableSubmitBtn(addCardSubmitButton);
   closePopup(elementPopup);
 });
 closeImageButton.addEventListener('click', () => {
@@ -138,8 +145,7 @@ initialCards.forEach((element) => {
 
 //закрытие popup кликом по overlay
 const closePopupsByOverlayClick = () => {
-  const popupList = Array.from(document.querySelectorAll('.popup'));
-  popupList.forEach((item) => {
+  popupList.forEach(item => {
     item.addEventListener('click', (evt) => {
       closePopup(evt.target);
     });
