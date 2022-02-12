@@ -34,7 +34,6 @@ export class FormValidator {
     } else {
       this._hideInputError(input);
     }
-
     this._toggleButtonState();
   };
   enableValidation() {

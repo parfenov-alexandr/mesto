@@ -38,6 +38,7 @@ const formSelectors = {
 
 //шаблоны
 const templateSelector = '#place'
+
 //попапы
 const profilePopup = document.querySelector('.popup_type_edit');
 const elementPopup = document.querySelector('.popup_type_add');
