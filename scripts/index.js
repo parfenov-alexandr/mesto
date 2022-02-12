@@ -1,14 +1,52 @@
-//шаблоны
-const elementsTemplate = document.querySelector('#place').content;
+import { Card } from './Сard.js';
+import { FormValidator } from './FormValidator.js';
 
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const formSelectors = {
+  formSelector: '.form',
+  inputSelector: '.form__field',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_inactive',
+  inputErrorClass: 'form__field_type_error',
+  errorClass: 'form__field-error_active'
+};
+
+//шаблоны
+const templateSelector = '#place'
 //попапы
 const profilePopup = document.querySelector('.popup_type_edit');
-const elementPopup = document.querySelector('.popup_type_add');
-const bigImagePopup = document.querySelector('.popup_type_image');
+export const elementPopup = document.querySelector('.popup_type_add');
+export const bigImagePopup = document.querySelector('.popup_type_image');
 
 //формы
-const formEditProfile = profilePopup.querySelector('.form');
-const formAddCard = elementPopup.querySelector('.form');
+export const formEditProfile = profilePopup.querySelector('.form');
+export const formAddCard = elementPopup.querySelector('.form');
 
 //кнопки
 const editButton = document.querySelector('.profile__info-edit-button');
@@ -28,8 +66,8 @@ const elementTitleInput = formAddCard.querySelector('#element-name');
 const elementImageInput = formAddCard.querySelector('#element-link');
 
 //большая картинка с подписью
-const bigImage = bigImagePopup.querySelector('.popup__big-image');
-const bigImageTitle = bigImagePopup.querySelector('.popup__big-image-title');
+export const bigImage = bigImagePopup.querySelector('.popup__big-image');
+export const bigImageTitle = bigImagePopup.querySelector('.popup__big-image-title');
 
 //список всех попапов
 const popupList = Array.from(document.querySelectorAll('.popup'));
@@ -39,10 +77,10 @@ const editProfileSubmitButton = profilePopup.querySelector('.popup__submit-butto
 const addCardSubmitButton = elementPopup.querySelector('.popup__submit-button');
 
 //область с карточками
-const elementsList = document.querySelector('.elements');
+export const elementsList = document.querySelector('.elements');
 
 //функции
-const keyHandler = (evt) => {                                            //функция для закрытия popup по escape
+export const keyHandler = (evt) => {                                            //функция для закрытия popup по escape
   const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
     popupOpened.classList.remove('popup_opened');
@@ -54,7 +92,7 @@ const errorMessageClean = () => {                                               
     item.textContent = "";
   });
 };
-const openPopup = (popup) => {
+export const openPopup = (popup) => {
   document.addEventListener('keydown', keyHandler);              //закрытие popup нажатием escape
   popup.classList.add('popup_opened');
 }
@@ -68,34 +106,6 @@ const addProfileData = () => {
 const updateProfileData = () => {
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobInput.value;
-}
-const deleteElement = (evt) => {
-  evt.target.closest('.element').remove();
-}
-const like = (evt) => {
-  evt.target.classList.toggle('element__vector_active');
-}
-const createElement = (name, link) => {
-  const element = elementsTemplate.cloneNode(true);
-  const elementImage = element.querySelector('.element__image');
-  const elementTitle = element.querySelector('.element__title');
-  const likeButton = element.querySelector('.element__vector');
-  const deleteButton = element.querySelector('.element__delete');
-  elementImage.src = link;
-  elementTitle.textContent = name;
-  elementImage.alt = 'Фотография с изображением ' + name;
-  deleteButton.addEventListener('click', deleteElement);
-  likeButton.addEventListener('click', like);
-  elementImage.addEventListener('click', () => {
-    openPopup(bigImagePopup);
-    bigImage.src = link;
-    bigImageTitle.textContent = name;
-    bigImage.alt = 'Фотография с изображением ' + name;
-  });
-  return element;
-}
-const addElement = (elementsList, element) => {
-  elementsList.prepend(element);
 }
 const disableSubmitBtn = (buttonElement) => {
   buttonElement.classList.add('popup__submit-button_inactive');
@@ -129,19 +139,17 @@ formEditProfile.addEventListener('submit', (evt) => {                           
 });
 formAddCard.addEventListener('submit', (evt) => {                               //submit для карточки
   evt.preventDefault();
-  addElement(elementsList, createElement(elementTitleInput.value, elementImageInput.value))
+  const card = new Card(elementImageInput.value, elementTitleInput.value, templateSelector);
+  const cardElement = card.createElement();
+  elementsList.prepend(cardElement);
   formAddCard.reset();
   disableSubmitBtn(addCardSubmitButton);
   closePopup(elementPopup);
 });
+
 closeImageButton.addEventListener('click', () => {
   closePopup(bigImagePopup);
 })
-
-//первоначальное размещение карточек на странице
-initialCards.forEach((element) => {
-  addElement(elementsList, createElement(element.name, element.link))
-});
 
 //закрытие popup кликом по overlay
 const closePopupsByOverlayClick = () => {
@@ -152,3 +160,16 @@ const closePopupsByOverlayClick = () => {
   });
 }
 closePopupsByOverlayClick();
+
+//Первоначальное размещение карточек
+initialCards.forEach((item) => {
+  const card = new Card(item.link, item.name, templateSelector);
+  const cardElement = card.createElement();
+  elementsList.append(cardElement);
+});
+
+//Включение валидации
+const formEditProfileValidate = new FormValidator(formSelectors, formEditProfile);
+const formAddCartValidate = new FormValidator(formSelectors, formAddCard);
+formEditProfileValidate.enableValidation();
+formAddCartValidate.enableValidation();
