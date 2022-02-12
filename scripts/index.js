@@ -27,7 +27,6 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
 const formSelectors = {
   formSelector: '.form',
   inputSelector: '.form__field',
@@ -41,12 +40,12 @@ const formSelectors = {
 const templateSelector = '#place'
 //попапы
 const profilePopup = document.querySelector('.popup_type_edit');
-export const elementPopup = document.querySelector('.popup_type_add');
+const elementPopup = document.querySelector('.popup_type_add');
 export const bigImagePopup = document.querySelector('.popup_type_image');
 
 //формы
-export const formEditProfile = profilePopup.querySelector('.form');
-export const formAddCard = elementPopup.querySelector('.form');
+const formEditProfile = profilePopup.querySelector('.form');
+const formAddCard = elementPopup.querySelector('.form');
 
 //кнопки
 const editButton = document.querySelector('.profile__info-edit-button');
@@ -77,10 +76,10 @@ const editProfileSubmitButton = profilePopup.querySelector('.popup__submit-butto
 const addCardSubmitButton = elementPopup.querySelector('.popup__submit-button');
 
 //область с карточками
-export const elementsList = document.querySelector('.elements');
+const elementsList = document.querySelector('.elements');
 
 //функции
-export const keyHandler = (evt) => {                                            //функция для закрытия popup по escape
+const keyHandler = (evt) => {                                            //функция для закрытия popup по escape
   const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
     popupOpened.classList.remove('popup_opened');
@@ -146,7 +145,6 @@ formAddCard.addEventListener('submit', (evt) => {                               
   disableSubmitBtn(addCardSubmitButton);
   closePopup(elementPopup);
 });
-
 closeImageButton.addEventListener('click', () => {
   closePopup(bigImagePopup);
 })

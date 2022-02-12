@@ -1,5 +1,5 @@
 export class FormValidator {
-  constructor( settings, form) {
+  constructor(settings, form) {
     this._form = form;
     this._settings = settings;
   }
@@ -29,12 +29,12 @@ export class FormValidator {
   };
   _isValid = (input) => {          //проверяет валидность полей
     this._errorElement = this._form.querySelector(`.${input.id}-error`);
-    console.log(input)
     if (!input.validity.valid) {
       this._showInputError(input);
     } else {
       this._hideInputError(input);
     }
+
     this._toggleButtonState();
   };
   enableValidation() {
