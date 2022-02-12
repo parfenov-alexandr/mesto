@@ -23,7 +23,7 @@ export class Card {
     this._deleteButton.addEventListener('click', this._deleteElement);
     this._elementImage.addEventListener('click', this._openBigImage);
   }
-  _renderCard = () => {
+  _fillCardData = () => {
     this._elementImage.src = this._link;
     this._elementTitle.textContent = this._name;
     this._elementImage.alt = 'Фотография с изображением ' + this._name;
@@ -34,7 +34,7 @@ export class Card {
     this._elementTitle = this._element.querySelector('.element__title');
     this._likeButton = this._element.querySelector('.element__vector');
     this._deleteButton = this._element.querySelector('.element__delete');
-    this._renderCard();
+    this._fillCardData();
     this._setEventListeners();
     return this._element;
   }
