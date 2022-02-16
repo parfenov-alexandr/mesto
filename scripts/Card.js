@@ -1,16 +1,17 @@
 import { bigImagePopup, bigImage, bigImageTitle, openPopup } from './index.js';
 
 export class Card {
-  constructor(link, name, templateSelector) {
-    this._link = link;
-    this._name = name;
-    this._template = document.querySelector(templateSelector).content;
+  constructor(data, templateSelector) {
+    this._link = data.link;
+    this._name = data.name;
+    this._template = templateSelector;
   }
-  _like = (evt) => {
-    evt.target.classList.toggle('element__vector_active');
+  _like = () => {
+    this._likeButton.classList.toggle('element__vector_active');
   }
-  _deleteElement = (evt) => {
-    evt.target.closest('.element').remove();
+  _deleteElement = () => {
+    this._element.remove();
+    this._element = null;
   }
   _openBigImage = () => {
     openPopup(bigImagePopup);
@@ -29,7 +30,7 @@ export class Card {
     this._elementImage.alt = 'Фотография с изображением ' + this._name;
   }
   createElement = () => {
-    this._element = this._template.cloneNode(true);
+    this._element = document.querySelector(this._template).content.querySelector('.element').cloneNode(true);
     this._elementImage = this._element.querySelector('.element__image');
     this._elementTitle = this._element.querySelector('.element__title');
     this._likeButton = this._element.querySelector('.element__vector');
