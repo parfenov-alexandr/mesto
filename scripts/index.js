@@ -63,11 +63,11 @@ const closeByEscape = (evt) => {                              //закрытие
   };
 }
 export const openPopup = (popup) => {
-  document.addEventListener('keydown', closeByEscape);     
+  document.addEventListener('keydown', closeByEscape);
   popup.classList.add('popup_opened');
 }
 const closePopup = (popup) => {
-  popup.removeEventListener('keydown', closeByEscape); 
+  popup.removeEventListener('keydown', closeByEscape);
   popup.classList.remove('popup_opened');
 }
 const addProfileData = () => {
@@ -81,7 +81,7 @@ const updateProfileData = () => {
 const createCard = (data) => {
   const card = new Card(data, templateSelector);
   const cardElement = card.createElement();
-  elementsList.prepend(cardElement)
+  return cardElement;
 }
 
 //обработчики
@@ -112,10 +112,10 @@ formEditProfile.addEventListener('submit', (evt) => {                           
 });
 formAddCard.addEventListener('submit', (evt) => {                               //submit для карточки
   evt.preventDefault();
-  createCard({
+  elementsList.prepend(createCard({
     name: elementTitleInput.value,
     link: elementImageInput.value
-  });
+  }));
   formAddCard.reset();
   closePopup(elementPopup);
 });
@@ -135,7 +135,7 @@ closePopupsByOverlayClick();
 
 //Первоначальное размещение карточек
 initialCards.forEach((data) => {
-  createCard(data)
+  elementsList.prepend(createCard(data))
 });
 
 //создание экземпляров класса FormValidator
