@@ -1,10 +1,9 @@
-import { bigImagePopup, bigImage, bigImageTitle, openPopup } from './index.js';
-
-export class Card {
-  constructor(data, templateSelector) {
+export default class Card {
+  constructor(data, templateSelector, handleCardClick) {
     this._link = data.link;
     this._name = data.name;
     this._template = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
   _like = () => {
     this._likeButton.classList.toggle('element__vector_active');
@@ -13,16 +12,12 @@ export class Card {
     this._element.remove();
     this._element = null;
   }
-  _openBigImage = () => {
-    openPopup(bigImagePopup);
-    bigImage.src = this._link;
-    bigImageTitle.textContent = this._name;
-    bigImage.alt = 'Фотография с изображением ' + this._name;
-  }
   _setEventListeners = () => {
     this._likeButton.addEventListener('click', this._like);
     this._deleteButton.addEventListener('click', this._deleteElement);
-    this._elementImage.addEventListener('click', this._openBigImage);
+    this._elementImage.addEventListener('click', () => {
+      this._handleCardClick(this._link, this._name)
+    });
   }
   _fillCardData = () => {
     this._elementImage.src = this._link;
