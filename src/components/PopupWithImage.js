@@ -1,16 +1,14 @@
 import Popup from './Popup.js';
-import { bigImage, bigImageTitle } from '../components/constants.js';
 
 export default class PoupWithImage extends Popup {
-  constructor(popupSelector, data) {
+  constructor(popupSelector, link, name) {
     super(popupSelector);
-    this._link = data.link;
-    this._name = data.name;
+    this._link = link;
+    this._name = name;
   }
-  open() {                                                        //открывает большую картинку
+  open(link, name) {                                                        //открывает большую картинку
     super.open();
-    bigImage.src = this._link;
-    bigImageTitle.textContent = this._name;
-    bigImage.alt = 'Фотография с изображением ' + this._name;
+    this._link.src = link;
+    this._name.textContent = name;
   }
 }

@@ -5,74 +5,77 @@ import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import {
   formEditProfile, formAddCard, profilePopup, elementPopup,
-  bigImagePopup, editButton, addButton, closeAddButton, elementTitleInput, elementImageInput,
-  profileTitle, profileSubtitle, formSelectors
+  bigImagePopup, editButton, addButton, elementTitleInput, elementImageInput, nameInput, jobInput,
+  formSelectors, profileSelectors, bigImage, bigImageTitle
 } from '../components/constants.js'
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-import '../pages/index.css';
+
 
 const templateSelector = '#place'
 export const elementsContainer = '.elements'
 
 //открытие картинки
-
+const image = new PopupWithImage(bigImagePopup, bigImage, bigImageTitle);
+image.setEventListeners();
 const handleCardClick = (link, name) => {
-  const image = new PopupWithImage(bigImagePopup, {link, name});
-  image.open();
-  image.setEventListeners();
-  image.closePopupsByOverlayClick()
-
+  image.open(link, name)
+  bigImage.alt = `Фотография с изображением ${name}`;
 }
-const initialCardsList = new Section({
+
+const createCard = (data) => {
+  const card = new Card(data, templateSelector, handleCardClick)
+  const cardElement = card.createElement();
+  cardsList.addItem(cardElement);
+}
+
+const cardsList = new Section({
   items: initialCards, renderer: (data) => {
-    const card = new Card(data, templateSelector, handleCardClick)
-    const cardElement = card.createElement();
-    initialCardsList.addItem(cardElement);
+    createCard(data);
   }
 }, elementsContainer);
 
 //создание первоначальных карточек
+cardsList.renderItems();
 
-initialCardsList.renderItems();
+const info = new UserInfo(profileSelectors);
+info.getUserInfo();
 
-const info = new UserInfo(profileTitle, profileSubtitle);
-const profileForm = new PopupWithForm({
+const profileEditForm = new PopupWithForm({
   popupForm: formEditProfile,
   handleFormSubmit: () => {
-    info.setUserInfo();
+    info.setUserInfo(nameInput.value, jobInput.value);
   }
 }, profilePopup);
+profileEditForm.setEventListeners();
+
+const getUserInfo = () => {
+  nameInput.value = info.getUserInfo()['userName'];
+  jobInput.value = info.getUserInfo()['userJob']
+}
 
 editButton.addEventListener('click', () => {
   formEditProfileValidate.errorMessageClean();
   formEditProfileValidate.enableSubmitButton();
-  profileForm.closePopupsByOverlayClick();
-  info.getUserInfo();
-  profileForm.open();
-  profileForm.setEventListeners();
+  profileEditForm.open();
+  getUserInfo();
 });
+
 const cardAddForm = new PopupWithForm({
   popupForm: formAddCard, handleFormSubmit: () => {
-    const card = new Card(
-      {
-        name: elementTitleInput.value,
-        link: elementImageInput.value
-      }, templateSelector, handleCardClick).createElement()
-    initialCardsList.addItem(card);
+    createCard({
+      name: elementTitleInput.value,
+      link: elementImageInput.value
+    });
   }
 }, elementPopup);
+cardAddForm.setEventListeners();
 
 addButton.addEventListener('click', () => {
   formAddCartValidate.disableSubmitButton();
   formAddCartValidate.errorMessageClean();
   formAddCard.reset();
   cardAddForm.open();
-  cardAddForm.setEventListeners();
-  cardAddForm.closePopupsByOverlayClick();
-});
-closeAddButton.addEventListener('click', () => {
-  cardAddForm.close();
 });
 
 //создание экземпляров класса FormValidator

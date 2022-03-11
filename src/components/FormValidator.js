@@ -3,16 +3,15 @@ export default class FormValidator {
     this._form = form;
     this._settings = settings;
     this._inputList = Array.from(this._form.querySelectorAll(settings.inputSelector));
+    this._buttonElement = this._form.querySelector(settings.submitButtonSelector);
   }
   disableSubmitButton = () => {
-    const { submitButtonSelector, inactiveButtonClass } = this._settings;
-    this.buttonElement = this._form.querySelector(submitButtonSelector);
-    this.buttonElement.classList.add(inactiveButtonClass);
-    this.buttonElement.disabled = true;
+    const { inactiveButtonClass } = this._settings;
+    this._buttonElement.classList.add(inactiveButtonClass);
+    this._buttonElement.disabled = true;
   }
   enableSubmitButton = () => {
-    const { submitButtonSelector, inactiveButtonClass } = this._settings;
-    this._buttonElement = this._form.querySelector(submitButtonSelector)
+    const { inactiveButtonClass } = this._settings;
     this._buttonElement.classList.remove(inactiveButtonClass);
     this._buttonElement.disabled = false;
   }

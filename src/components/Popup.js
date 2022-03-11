@@ -1,8 +1,7 @@
-import { closeEditButton, closeImageButton } from '../components/constants.js'
-
 export default class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;                            //селектор попапа
+    this._closeButton = this._popupSelector.querySelector('#close-button')
   }
   _handleEscClose = (evt) => {                                      //закрытие по escape
     if (evt.key === 'Escape') {
@@ -11,24 +10,20 @@ export default class Popup {
   }
   open() {                                                        //открывает попап
     this._popupSelector.classList.add('popup_opened');
+    document.addEventListener('keydown', this._handleEscClose)
   }
   close() {                                                                //закрывает попап
     this._popupSelector.classList.remove('popup_opened');
+    document.removeEventListener('keydown', this._handleEscClose)
   }
   setEventListeners() {
-    document.addEventListener('keydown', this._handleEscClose)
-    closeEditButton.addEventListener('click', () => {
-      this.close()
-    });
-    closeImageButton.addEventListener('click', () => {
-      this.close()
-    });
-  }
-  closePopupsByOverlayClick = () => {                                    //слушатель закрытия по клику
-    this._popupSelector.addEventListener('click', (evt) => {
+    this._popupSelector.addEventListener('click', (evt) => {             //слушатель закрытия по клику
       if (evt.target.classList.contains('popup_opened')) {
         this.close(evt.target);
       }
+    });
+    this._closeButton.addEventListener('click', () => {
+      this.close()
     });
   }
 }
