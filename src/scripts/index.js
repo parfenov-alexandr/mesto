@@ -5,12 +5,12 @@ import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import {
   formEditProfile, formAddCard, profilePopup, elementPopup,
-  bigImagePopup, editButton, addButton, elementTitleInput, elementImageInput, nameInput, jobInput,
+  bigImagePopup, editButton, addButton, nameInput, jobInput,
   formSelectors, profileSelectors, bigImage, bigImageTitle
 } from '../components/constants.js'
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-import '../pages/index.css'
+import '../pages/index.css';
 
 const templateSelector = '#place'
 export const elementsContainer = '.elements'
@@ -43,8 +43,8 @@ info.getUserInfo();
 
 const profileEditForm = new PopupWithForm({
   popupForm: formEditProfile,
-  handleFormSubmit: () => {
-    info.setUserInfo(nameInput.value, jobInput.value);
+  handleFormSubmit: (data) => {
+    info.setUserInfo(data['name'], data['occupation']);
   }
 }, profilePopup);
 profileEditForm.setEventListeners();
@@ -62,10 +62,10 @@ editButton.addEventListener('click', () => {
 });
 
 const cardAddForm = new PopupWithForm({
-  popupForm: formAddCard, handleFormSubmit: () => {
+  popupForm: formAddCard, handleFormSubmit: (data) => {
     createCard({
-      name: elementTitleInput.value,
-      link: elementImageInput.value
+      name: data['element-name'],
+      link: data['element-link']
     });
   }
 }, elementPopup);

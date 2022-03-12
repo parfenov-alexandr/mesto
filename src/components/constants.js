@@ -22,10 +22,6 @@ export const bigImageTitle = bigImagePopup.querySelector('.popup__big-image-titl
 export const nameInput = formEditProfile.querySelector('#name');
 export const jobInput = formEditProfile.querySelector('#occupation');
 
-//поля формы добавления карточки
-export const elementTitleInput = formAddCard.querySelector('#element-name');
-export const elementImageInput = formAddCard.querySelector('#element-link');
-
 //сабмиты форм
 export const editProfileSubmitButton = profilePopup.querySelector('.popup__submit-button');
 export const addCardSubmitButton = elementPopup.querySelector('.popup__submit-button');
