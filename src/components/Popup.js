@@ -1,7 +1,7 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;                            //селектор попапа
-    this._closeButton = this._popupSelector.querySelector('.popup__close-icon_type_close')
+    this._closeButton = this._popupSelector.querySelector('.popup__close-button')
   }
   _handleEscClose = (evt) => {                                      //закрытие по escape
     if (evt.key === 'Escape') {

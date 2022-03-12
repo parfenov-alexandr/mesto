@@ -44,4 +44,4 @@
 @import url(../blocks/popup/_type/popup_type_edit.css);
 @import url(../blocks/popup/__image-close-icon/popup__image-close-icon.css);
 @import url(../blocks/popup/__big-image-title/popup__big-image-title.css);
-@import url(../blocks/popup/__close-icon/_type/popup__close-icon_type_close);
+@import url(../blocks/popup/__close-button/popup__close-button.css);
