@@ -10,7 +10,7 @@ import {
 } from '../components/constants.js'
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-
+import '../pages/index.css'
 
 const templateSelector = '#place'
 export const elementsContainer = '.elements'
