@@ -44,4 +44,13 @@
 @import url(../blocks/popup/_type/popup_type_edit.css);
 @import url(../blocks/popup/__image-close-icon/popup__image-close-icon.css);
 @import url(../blocks/popup/__big-image-title/popup__big-image-title.css);
-@import url(../blocks/popup/__close-button/popup__close-button.css);
+@import url(../blocks/popup/_type/popup_type_image.css);
+@import url(../blocks/element/__like-count/element__like-count.css);
+@import url(../blocks/popup/_type/popup_type_delete-confirm.css);
+@import url(../blocks/popup/__close-confirm/popup__close-confirm.css);
+@import url(../blocks/profile/__avatar-edit-button/profile__avatar-edit-button.css);
+@import url(../blocks/popup/__close-avatar/popup__close-avatar.css);
+@import url(../blocks/element/__like-block/element__like-block.css);
+@import url(../blocks/profile/__avatar-block/profile__avatar-block.css);
+@import url(../blocks/popup/__title-confirm/popupu__title-confirm.css);
+@import url(../blocks/avatar-error/avatar-error.css);

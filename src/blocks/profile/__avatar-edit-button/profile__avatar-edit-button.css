@@ -1,0 +1,23 @@
+.profile__avatar-edit-button {
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  background-image: url(../../../images/avatar-edit-icon.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  opacity: 0;
+  z-index: 1;
+}
+
+
+
+
+
+

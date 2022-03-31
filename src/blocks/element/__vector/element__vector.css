@@ -6,9 +6,9 @@
   background-color: transparent;
   border: none;
   background-position: center;
-  margin: 5px 20px 0 0;
   cursor: pointer;
   padding: 0;
+  margin-bottom: 6px;
 }
 
 .element__vector:hover {

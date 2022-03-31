@@ -1,0 +1,21 @@
+.profile__avatar-block {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+}
+.profile__avatar-block:hover .profile__avatar-edit-button {
+  opacity: 1;
+  transition: opacity 1s ease .2s;
+}
+.profile__avatar-block:before {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  content: "";
+  background: rgba(0,0,0,0);
+}
+.profile__avatar-block:hover:before {
+  background: rgba(0,0,0,.8);
+  transition: background .5s ease .2s;
+}

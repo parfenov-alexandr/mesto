@@ -14,11 +14,14 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар пользователя">
+        <div class="profile__avatar-block">
+          <button type="button" class="profile__avatar-edit-button"></button>
+          <img class="profile__avatar" src="#" alt="Аватар пользователя">
+        </div>
         <div class="profile__info">
-          <h1 class="profile__info-title">Жак-Ив Кусто</h1>
+          <h1 class="profile__info-title"></h1>
           <button type="button" class="profile__info-edit-button"></button>
-          <p class="profile__info-subtitle">исследователь океана</p>
+          <p class="profile__info-subtitle"></p>
         </div>
         <button type="button" class="profile__add-button"></button>
       </section>
@@ -57,6 +60,26 @@
         </form>
       </div>
     </div>
+    <div class="popup popup_type_avatar">
+      <div class="popup__container">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="form" name="avatar-form" action="#" novalidate>
+          <button type="button" class="popup__close-avatar popup__close-button"></button>
+          <input type="url" id="avatar" name="avatar" class="form__field" placeholder="Введите ссылку" required>
+          <span class="avatar-error form__field-error"></span>
+          <button type="submit" id="avatar-submit" class="popup__submit-button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_type_delete-confirm">
+      <div class="popup__container">
+        <h2 class="popup__title-confirm">Вы уверены?</h2>
+        <form class="form" name="confirm" action="#" novalidate>
+          <button type="button" class="popup__close-confirm popup__close-button"></button>
+          <button type="submit" id="element-submit" class="popup__submit-button">Да</button>
+        </form>
+      </div>
+    </div>
     <div class="popup popup_type_image">
       <div class="popup__image-container">
         <figure class="popup__figure">
@@ -71,7 +94,10 @@
     <li class="element">
       <img class="element__image" alt="#" src="#">
       <h2 class="element__title"></h2>
-      <button type="button" class="element__vector"></button>
+      <div class="element__like-block">
+        <button type="button" class="element__vector"></button>
+        <span class="element__like-count"></span>
+      </div>
       <button type="button" class="element__delete"></button>
     </li>
   </template>
