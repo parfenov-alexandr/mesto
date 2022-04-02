@@ -16,6 +16,9 @@ export default class PopupWithForm extends Popup {
     });
     return this._formValues;
   }
+  changeSubmitHandler(newHandleFormSubmit) {
+    this._handleFormSubmit = newHandleFormSubmit;
+  }
   renderLoading(isLoading) {
     return isLoading ? this._buttonElement.textContent = 'Сохранение...' : this._buttonElement.textContent = this._buttonElementText;
   }

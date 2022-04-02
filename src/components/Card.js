@@ -16,7 +16,6 @@ export default class Card {
   _unfillLike = () => {
     this._likeButton.classList.remove('element__vector_active');
   }
-
   _fillLike = () => {
     this._likeButton.classList.add('element__vector_active');
   }
@@ -28,7 +27,6 @@ export default class Card {
     const userHasLikedCard = this._likes.find(user => user._id === this._userId);
     return userHasLikedCard;
   }
-
   setLikes(newLikes) {
     this._likes = newLikes;
     const likeCountElement = this._element.querySelector('.element__like-count');
@@ -67,7 +65,6 @@ export default class Card {
     if (this._ownerId !== this._userId) {
       this._deleteButton.style.display = 'none';
     }
-    console.log(this._ownerId)
     return this._element;
   }
 }

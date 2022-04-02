@@ -9,7 +9,6 @@ import {
 } from '../components/constants.js'
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-import PopupWithConfirmation from '../components/PopupWithConfirmation';
 import { api } from '../components/Api.js';
 import '../pages/index.css';
 
@@ -21,6 +20,9 @@ api.getProfile()
     info.setAvatar(res.avatar)
     userId = res._id
   })
+
+const info = new UserInfo(profileSelectors);
+info.getUserInfo();
 
 //получение карточек
 api.getCards()
@@ -62,12 +64,13 @@ const createCard = (data) => {
     handleCardClick,
     (id) => {
       confirmPopupForm.open();
-      confirmPopupForm._handleFormSubmit(id);
-      api.deleteCard(id)
-        .then(res => {
-          card.deleteElement(res);
-          confirmPopupForm.close()
-        })
+      confirmPopupForm.changeSubmitHandler(() => {
+        api.deleteCard(id)
+          .then(res => {
+            card.deleteElement(res);
+            confirmPopupForm.close()
+          })
+      })
     },
     (id) => {
       if (card.isLiked()) {
@@ -119,8 +122,6 @@ editButton.addEventListener('click', () => {
   profileEditForm.open();
   getUserInfo();
 });
-const info = new UserInfo(profileSelectors);
-info.getUserInfo();
 const profileEditForm = new PopupWithForm({
   popupForm: formEditProfile,
   handleFormSubmit: (data) => {
@@ -154,7 +155,7 @@ const cardAddForm = new PopupWithForm({
           link: res.link,
           likes: res.likes,
           id: res._id,
-          userId: userId,
+          userId: userId,                                   //проверить
           ownerId: res.owner_id
         })
       })
@@ -167,9 +168,8 @@ const cardAddForm = new PopupWithForm({
 cardAddForm.setEventListeners();
 
 //подтверждение удаления карточки
-const confirmPopupForm = new PopupWithConfirmation({
-  popupForm: formConfirm, handleFormSubmit: () => {
-  }
+const confirmPopupForm = new PopupWithForm({
+  popupForm: formConfirm
 }, confirmPopup)
 confirmPopupForm.setEventListeners()
 
