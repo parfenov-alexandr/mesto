@@ -1,7 +1,7 @@
 .popup__close-confirm {
   position: absolute;
-  left: 402px;
-  bottom: 156px;
+  left: 400px;
+  bottom: 152px;
   width: 32px;
   height: 32px;
   background-image: url(../../../images/close_icon.svg);
@@ -17,9 +17,9 @@
  }
 
  @media screen and (max-width: 540px) {
-   .popup__close-icon {
-    left: 262px;
-    bottom: 338px;
+   .popup__close-confirm {
+    left: 264px;
+    bottom: 146px;
     width: 20px;
     height: 20px;
    }

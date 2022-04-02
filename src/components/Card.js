@@ -67,6 +67,7 @@ export default class Card {
     if (this._ownerId !== this._userId) {
       this._deleteButton.style.display = 'none';
     }
+    console.log(this._ownerId)
     return this._element;
   }
 }

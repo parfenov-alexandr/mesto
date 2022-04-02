@@ -9,6 +9,7 @@ import {
 } from '../components/constants.js'
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation';
 import { api } from '../components/Api.js';
 import '../pages/index.css';
 
@@ -61,13 +62,12 @@ const createCard = (data) => {
     handleCardClick,
     (id) => {
       confirmPopupForm.open();
-      confirmPopupForm.changeSubmitHandler(() => {
-        api.deleteCard(id)
-          .then(res => {
-            card.deleteElement(res);
-            confirmPopupForm.close()
-          })
-      })
+      confirmPopupForm._handleFormSubmit(id);
+      api.deleteCard(id)
+        .then(res => {
+          card.deleteElement(res);
+          confirmPopupForm.close()
+        })
     },
     (id) => {
       if (card.isLiked()) {
@@ -167,8 +167,9 @@ const cardAddForm = new PopupWithForm({
 cardAddForm.setEventListeners();
 
 //подтверждение удаления карточки
-const confirmPopupForm = new PopupWithForm({
-  popupForm: formConfirm
+const confirmPopupForm = new PopupWithConfirmation({
+  popupForm: formConfirm, handleFormSubmit: () => {
+  }
 }, confirmPopup)
 confirmPopupForm.setEventListeners()
 
