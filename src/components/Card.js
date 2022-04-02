@@ -12,7 +12,6 @@ export default class Card {
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick
   }
-
   _unfillLike = () => {
     this._likeButton.classList.remove('element__vector_active');
   }
