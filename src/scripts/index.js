@@ -12,42 +12,41 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import { api } from '../components/Api.js';
 import '../pages/index.css';
 
-//получение данных профиля
-let userId;
-api.getProfile()
-  .then(res => {
-    info.setUserInfo(res.name, res.about);
-    info.setAvatar(res.avatar)
-    userId = res._id
-  })
+const templateSelector = '#place'
+export const elementsContainer = '.elements'
 
 const info = new UserInfo(profileSelectors);
-info.getUserInfo();
 
-//получение карточек
-api.getCards()
-  .then(list => {
-    list.forEach(data => {
-      const card = createCard({
-        name: data.name,
-        link: data.link,
-        likes: data.likes,
-        id: data._id,
-        userId: userId,
-        ownerId: data.owner._id
+//получение данных профиля и карточек
+let userId;
+Promise.all([api.getProfile(), api.getCards()])
+  .then(([res, list]) => {
+    {
+      info.setUserInfo(res.name, res.about);
+      info.setAvatar(res.avatar)
+      userId = res._id
+    }
+    {
+      list.reverse().forEach(data => {
+        const card = createCard({
+          name: data.name,
+          link: data.link,
+          likes: data.likes,
+          id: data._id,
+          userId: userId,
+          ownerId: data.owner._id
+        })
+        cardsList.renderItems(card);
       })
-      cardsList.renderItems(card)
-    })
+    }
   })
+  .catch(console.log)
 
 //функция для заполнения полей формы данными профиля
 const getUserInfo = () => {
   nameInput.value = info.getUserInfo()['userName'];
   jobInput.value = info.getUserInfo()['userJob'];
 }
-
-const templateSelector = '#place'
-export const elementsContainer = '.elements'
 
 //увеличение картинки
 const image = new PopupWithImage(bigImagePopup, bigImage, bigImageTitle);
@@ -70,6 +69,7 @@ const createCard = (data) => {
             card.deleteElement(res);
             confirmPopupForm.close()
           })
+          .catch(console.log)
       })
     },
     (id) => {
@@ -78,11 +78,13 @@ const createCard = (data) => {
           .then(res => {
             card.setLikes(res.likes)
           })
+          .catch(console.log)
       } else {
         api.addLike(id)
           .then(res => {
             card.setLikes(res.likes)
           })
+          .catch(console.log)
       }
     }
   )
@@ -105,11 +107,12 @@ const updateAvatar = new PopupWithForm({
     updateAvatar.renderLoading(true);
     api.editAvatar(data['avatar'])
       .then(() => {
-        info.setAvatar(data['avatar'])
-      })
-      .finally(() => {
-        updateAvatar.renderLoading(false);
+        info.setAvatar(data['avatar']);
         updateAvatar.close()
+      })
+      .catch(console.log)
+      .finally(() => {
+        updateAvatar.renderLoading(false)
       })
   }
 }, avatarPopup)
@@ -129,10 +132,11 @@ const profileEditForm = new PopupWithForm({
     api.editProfile(data['name'], data['occupation'])
       .then((res) => {
         info.setUserInfo(data['name'], data['occupation']);
+        profileEditForm.close();
       })
+      .catch(console.log)
       .finally((res) => {
         profileEditForm.renderLoading(false);
-        profileEditForm.close();
       })
   }
 }, profilePopup);
@@ -155,13 +159,14 @@ const cardAddForm = new PopupWithForm({
           link: res.link,
           likes: res.likes,
           id: res._id,
-          userId: userId,                                   //проверить
-          ownerId: res.owner_id
+          userId: userId,
+          ownerId: res.owner._id
         })
+        cardAddForm.close();
       })
+      .catch(console.log)
       .finally(() => {
         cardAddForm.renderLoading(false);
-        cardAddForm.close();
       })
   }
 }, elementPopup);
